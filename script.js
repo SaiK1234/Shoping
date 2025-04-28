@@ -1,4 +1,65 @@
 document.addEventListener('DOMContentLoaded', function() {
+    // Get elements that will be used in multiple places
+    const siteOverlay = document.querySelector('.site-overlay');
+    
+    // Mobile Menu Toggle
+    const menuToggle = document.querySelector('.menu-toggle');
+    const navLinks = document.querySelector('.nav-links');
+    const dropdowns = document.querySelectorAll('.dropdown');
+
+    if (menuToggle && navLinks) {
+        menuToggle.addEventListener('click', function() {
+            navLinks.classList.toggle('active');
+            siteOverlay.classList.toggle('active');
+            document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : '';
+        });
+
+        // Handle dropdown toggles in mobile view
+        dropdowns.forEach(dropdown => {
+            const dropdownToggle = dropdown.querySelector('.dropdown-toggle');
+            
+            dropdownToggle.addEventListener('click', function(e) {
+                // Only for mobile
+                if (window.innerWidth <= 768) {
+                    e.preventDefault();
+                    dropdown.classList.toggle('active');
+                    
+                    // Close other dropdowns
+                    dropdowns.forEach(otherDropdown => {
+                        if (otherDropdown !== dropdown) {
+                            otherDropdown.classList.remove('active');
+                        }
+                    });
+                }
+            });
+        });
+
+        // Close mobile menu when clicking elsewhere
+        document.addEventListener('click', function(e) {
+            if (navLinks.classList.contains('active') && 
+                !navLinks.contains(e.target) && 
+                !menuToggle.contains(e.target)) {
+                navLinks.classList.remove('active');
+                siteOverlay.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+
+        // Close mobile menu when resizing to desktop
+        window.addEventListener('resize', function() {
+            if (window.innerWidth > 768 && navLinks.classList.contains('active')) {
+                navLinks.classList.remove('active');
+                siteOverlay.classList.remove('active');
+                document.body.style.overflow = '';
+                
+                // Reset dropdown states
+                dropdowns.forEach(dropdown => {
+                    dropdown.classList.remove('active');
+                });
+            }
+        });
+    }
+
     // Manual Carousel functionality
     const carouselContainer = document.querySelector('.carousel-container');
     const slides = document.querySelectorAll('.carousel-slide');
@@ -86,7 +147,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const searchIcon = document.querySelector('.search-icon');
     const searchOverlay = document.querySelector('.search-overlay');
     const closeSearch = document.querySelector('.close-search');
-    const siteOverlay = document.querySelector('.site-overlay');
     
     if (searchIcon && searchOverlay && closeSearch) {
         // Open search overlay
