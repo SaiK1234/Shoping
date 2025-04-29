@@ -1,47 +1,92 @@
+/**
+ * Sunasutra Website JavaScript
+ * Mobile-optimized navigation and UI functionality
+ */
+
 document.addEventListener('DOMContentLoaded', function() {
     // Get elements that will be used in multiple places
     const siteOverlay = document.querySelector('.site-overlay');
-    
-    // Mobile Menu Toggle
     const menuToggle = document.querySelector('.menu-toggle');
     const navLinks = document.querySelector('.nav-links');
     const dropdowns = document.querySelectorAll('.dropdown');
+    const searchIcon = document.querySelector('.search-icon');
+    const searchOverlay = document.querySelector('.search-overlay');
+    const closeSearch = document.querySelector('.close-search');
 
+    // Mobile Menu Toggle functionality
     if (menuToggle && navLinks) {
+        // Add aria attributes for accessibility
+        menuToggle.setAttribute('aria-expanded', 'false');
+        menuToggle.setAttribute('aria-label', 'Toggle navigation menu');
+        
+        // Toggle mobile menu visibility
         menuToggle.addEventListener('click', function() {
             navLinks.classList.toggle('active');
             siteOverlay.classList.toggle('active');
-            document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : '';
+            const isExpanded = navLinks.classList.contains('active');
+            menuToggle.setAttribute('aria-expanded', isExpanded ? 'true' : 'false');
+            document.body.style.overflow = isExpanded ? 'hidden' : '';
+            
+            // If closing the menu, close all dropdowns
+            if (!isExpanded) {
+                dropdowns.forEach(dropdown => {
+                    dropdown.classList.remove('active');
+                    const dropdownToggle = dropdown.querySelector('.dropdown-toggle');
+                    if (dropdownToggle) dropdownToggle.setAttribute('aria-expanded', 'false');
+                });
+            }
         });
 
         // Handle dropdown toggles in mobile view
         dropdowns.forEach(dropdown => {
             const dropdownToggle = dropdown.querySelector('.dropdown-toggle');
             
-            dropdownToggle.addEventListener('click', function(e) {
-                // Only for mobile
-                if (window.innerWidth <= 768) {
-                    e.preventDefault();
-                    dropdown.classList.toggle('active');
-                    
-                    // Close other dropdowns
-                    dropdowns.forEach(otherDropdown => {
-                        if (otherDropdown !== dropdown) {
-                            otherDropdown.classList.remove('active');
-                        }
-                    });
-                }
-            });
+            if (dropdownToggle) {
+                // Add aria attributes for accessibility
+                dropdownToggle.setAttribute('aria-expanded', 'false');
+                dropdownToggle.setAttribute('aria-haspopup', 'true');
+                
+                dropdownToggle.addEventListener('click', function(e) {
+                    // Only for mobile and tablet
+                    if (window.innerWidth <= 768) {
+                        e.preventDefault();
+                        e.stopPropagation(); // Stop event bubbling
+                        
+                        const isActive = dropdown.classList.contains('active');
+                        
+                        // Close other dropdowns
+                        dropdowns.forEach(otherDropdown => {
+                            if (otherDropdown !== dropdown && otherDropdown.classList.contains('active')) {
+                                otherDropdown.classList.remove('active');
+                                const otherToggle = otherDropdown.querySelector('.dropdown-toggle');
+                                if (otherToggle) otherToggle.setAttribute('aria-expanded', 'false');
+                            }
+                        });
+                        
+                        // Toggle current dropdown
+                        dropdown.classList.toggle('active');
+                        dropdownToggle.setAttribute('aria-expanded', !isActive ? 'true' : 'false');
+                    }
+                });
+            }
         });
 
-        // Close mobile menu when clicking elsewhere
+        // Close mobile menu when clicking outside
         document.addEventListener('click', function(e) {
-            if (navLinks.classList.contains('active') && 
-                !navLinks.contains(e.target) && 
+            if (navLinks.classList.contains('active') &&
+                !navLinks.contains(e.target) &&
                 !menuToggle.contains(e.target)) {
                 navLinks.classList.remove('active');
                 siteOverlay.classList.remove('active');
+                menuToggle.setAttribute('aria-expanded', 'false');
                 document.body.style.overflow = '';
+
+                // Close all dropdowns
+                dropdowns.forEach(dropdown => {
+                    dropdown.classList.remove('active');
+                    const dropdownToggle = dropdown.querySelector('.dropdown-toggle');
+                    if (dropdownToggle) dropdownToggle.setAttribute('aria-expanded', 'false');
+                });
             }
         });
 
@@ -50,11 +95,14 @@ document.addEventListener('DOMContentLoaded', function() {
             if (window.innerWidth > 768 && navLinks.classList.contains('active')) {
                 navLinks.classList.remove('active');
                 siteOverlay.classList.remove('active');
+                menuToggle.setAttribute('aria-expanded', 'false');
                 document.body.style.overflow = '';
-                
+
                 // Reset dropdown states
                 dropdowns.forEach(dropdown => {
                     dropdown.classList.remove('active');
+                    const dropdownToggle = dropdown.querySelector('.dropdown-toggle');
+                    if (dropdownToggle) dropdownToggle.setAttribute('aria-expanded', 'false');
                 });
             }
         });
@@ -141,13 +189,32 @@ document.addEventListener('DOMContentLoaded', function() {
                 showSlide(parseInt(dot.dataset.slide));
             });
         });
+
+        // Add touch swipe support for mobile
+        let touchStartX = 0;
+        let touchEndX = 0;
+        
+        function handleGesture() {
+            if (touchEndX < touchStartX - 50) {
+                // Swipe left, go to next slide
+                showSlide(currentSlide + 1);
+            } else if (touchEndX > touchStartX + 50) {
+                // Swipe right, go to previous slide
+                showSlide(currentSlide - 1);
+            }
+        }
+        
+        carouselContainer.addEventListener('touchstart', e => {
+            touchStartX = e.changedTouches[0].screenX;
+        }, false);
+        
+        carouselContainer.addEventListener('touchend', e => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleGesture();
+        }, false);
     }
 
     // Search functionality
-    const searchIcon = document.querySelector('.search-icon');
-    const searchOverlay = document.querySelector('.search-overlay');
-    const closeSearch = document.querySelector('.close-search');
-    
     if (searchIcon && searchOverlay && closeSearch) {
         // Open search overlay
         searchIcon.addEventListener('click', function(e) {
@@ -848,7 +915,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // Function to initialize the sustainability facts slider
+    // Function to initialize the sustainability facts slider - UPDATED FOR MOBILE
     function initializeSustainabilityFactsSlider() {
         const factsSlides = document.querySelectorAll('.fact-slide');
         const factsPrev = document.querySelector('.facts-prev');
@@ -894,9 +961,37 @@ document.addEventListener('DOMContentLoaded', function() {
             currentFactIndex = (currentFactIndex + 1) % totalFacts;
             showFact(currentFactIndex);
         });
+
+        // Add touch swipe support for facts slider
+        const factsSlider = document.querySelector('.facts-slider');
+        if (factsSlider) {
+            let touchStartX = 0;
+            let touchEndX = 0;
+            
+            function handleSwipe() {
+                if (touchEndX < touchStartX - 50) {
+                    // Swipe left, go to next fact
+                    currentFactIndex = (currentFactIndex + 1) % totalFacts;
+                    showFact(currentFactIndex);
+                } else if (touchEndX > touchStartX + 50) {
+                    // Swipe right, go to previous fact
+                    currentFactIndex = (currentFactIndex - 1 + totalFacts) % totalFacts;
+                    showFact(currentFactIndex);
+                }
+            }
+            
+            factsSlider.addEventListener('touchstart', e => {
+                touchStartX = e.changedTouches[0].screenX;
+            }, false);
+            
+            factsSlider.addEventListener('touchend', e => {
+                touchEndX = e.changedTouches[0].screenX;
+                handleSwipe();
+            }, false);
+        }
     }
     
-    // Function to initialize the influence slider
+    // Function to initialize the influence slider - UPDATED FOR MOBILE
     function initializeInfluenceSlider() {
         const influenceSlides = document.querySelectorAll('.influence-slide');
         const influencePrev = document.querySelector('.influence-prev');
@@ -951,5 +1046,37 @@ document.addEventListener('DOMContentLoaded', function() {
                 updateSlider();
             });
         });
+
+        // Add touch swipe support for influence slider
+        const influenceSliderContainer = document.querySelector('.influence-slides-container');
+        if (influenceSliderContainer) {
+            let touchStartX = 0;
+            let touchEndX = 0;
+            
+            function handleSwipe() {
+                if (touchEndX < touchStartX - 50) {
+                    // Swipe left, go to next slide
+                    if (currentIndex < influenceSlides.length - 1) {
+                        currentIndex++;
+                        updateSlider();
+                    }
+                } else if (touchEndX > touchStartX + 50) {
+                    // Swipe right, go to previous slide
+                    if (currentIndex > 0) {
+                        currentIndex--;
+                        updateSlider();
+                    }
+                }
+            }
+            
+            influenceSliderContainer.addEventListener('touchstart', e => {
+                touchStartX = e.changedTouches[0].screenX;
+            }, false);
+            
+            influenceSliderContainer.addEventListener('touchend', e => {
+                touchEndX = e.changedTouches[0].screenX;
+                handleSwipe();
+            }, false);
+        }
     }
 });
