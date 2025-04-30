@@ -1920,7 +1920,7 @@ body {
     }
 }
 
-/* Improve tablet experience */
+/* tablet*/
 @media (min-width: 577px) and (max-width: 768px) {
     .product-slider {
         display: grid;
