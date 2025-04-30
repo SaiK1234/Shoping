@@ -134,7 +134,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         
         // Add pagination dots
-            prevArrow.innerHTML = '<i class="bi bi-chevron-left"></i>';
         if (!document.querySelector('.carousel-pagination')) {
             const paginationDiv = document.createElement('div');
             paginationDiv.className = 'carousel-pagination';
@@ -263,7 +262,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const shopButtons = document.querySelectorAll('.shop-button');
     shopButtons.forEach(button => {
         button.addEventListener('click', function() {
-            // Navigate to the shop page (can update this URL)
+            // Navigate to the shop page (you can update this URL)
             window.location.href = '#';
         });
     });
