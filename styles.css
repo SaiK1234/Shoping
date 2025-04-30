@@ -558,6 +558,7 @@ body {
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;
+    padding-bottom: 30px;
 }
 
 .category-text {
@@ -630,6 +631,7 @@ body {
 }
 
 .semiformal-prev, .casual-prev, .ethnic-prev, .accessories-prev {
+    padding-bottom: 40px;
     left: -20px;
 }
 
