@@ -16,7 +16,6 @@ body {
     margin: 0 auto;
     box-shadow: 0 2px 10px rgba(0,0,0,0.05);
 }
-
 .roboto-style, p  {
     font-family: "Roboto", sans-serif;
     font-optical-sizing: auto;
@@ -1792,7 +1791,9 @@ body {
     .category-products {
         width: 100%;
     }
-    
+    .category-text {
+        padding-left: 32px;
+    }
     /* Fix dots position */
     .slider-dots, 
     .facts-dots, 
@@ -1922,7 +1923,9 @@ body {
     .icon-links {
         gap: 8px;
     }
-    
+    .category-text {
+        padding-left: 10px;
+    }
     .icon-links a {
         font-size: 14px;
     }
