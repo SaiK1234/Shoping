@@ -1080,3 +1080,9 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 });
+
+
+const footerEl = document.getElementById("footer-el");
+if (footerEl) {
+    footerEl.textContent = new Date().getFullYear();
+}
