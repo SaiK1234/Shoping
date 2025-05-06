@@ -6,7 +6,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: white;
+    background-color: #ffffff;
     padding: 10px 50px;
     position: sticky;
     top: 0;
@@ -95,7 +95,7 @@ body {
 .dropdown-content {
     display: none;
     position: absolute;
-    background-color: white;
+    background-color: #ffffff;
     min-width: 200px;
     box-shadow: 0 8px 16px rgba(0,0,0,0.1);
     z-index: 1;
@@ -176,7 +176,7 @@ body {
     top: -8px;
     right: -8px;
     background-color: #702323;
-    color: white;
+    color: #ffffff;
     font-size: 11px;
     width: 16px;
     height: 16px;
@@ -291,7 +291,7 @@ body {
 }
 .popular-tags a:hover {
     background-color: #702323;
-    color: white;
+    color: #ffffff;
 }
 /* Site Overlay */
 .site-overlay {
@@ -352,7 +352,7 @@ body {
 
 .carousel-content {
     text-align: center;
-    color: white;
+    color: #ffffff;
     max-width: 900px;
     padding: 0 20px;
     z-index: 2;
@@ -367,7 +367,7 @@ body {
 
 .shop-button {
     background-color: #904E30;
-    color: white;
+    color: #ffffff;
     border: none;
     padding: 14px 40px;
     font-size: 16px;
@@ -520,7 +520,7 @@ body {
 }
 
 .collection-content {
-    color: white;
+    color: #ffffff;
     padding: 40px;
     width: 55%;
     text-align: left;
@@ -543,16 +543,16 @@ body {
 .view-all-btn {
     display: inline-block;
     padding: 10px 30px;
-    border: 2px solid white;
+    border: 2px solid #ffffff;
     border-radius: 30px;
-    color: white;
+    color: #ffffff;
     text-decoration: none;
     font-size: 14px;
     transition: all 0.3s;
 }
 
 .view-all-btn:hover {
-    background-color: white;
+    background-color: #ffffff;
     color: #333;
 }
 
@@ -575,7 +575,7 @@ body {
 .category-text {
     width: 30%;
     padding: 40px 30px;
-    color: white;
+    color: #ffffff;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -618,7 +618,7 @@ body {
 .category-text .view-all-btn {
     align-self: flex-start;
     margin-top: 10px;
-    border: 2px solid white;
+    border: 2px solid #ffffff;
 }
 
 .category-products {
@@ -657,7 +657,7 @@ body {
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    background-color: white;
+    background-color: #ffffff;
     border: 1px solid #ddd;
     display: flex;
     align-items: center;
@@ -676,7 +676,7 @@ body {
     flex: 0 0 auto;
     width: 100%;
     max-width: 300px;
-    background-color: white;
+    background-color: #ffffff;
     border-radius: 8px;
     overflow: hidden;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
@@ -744,7 +744,7 @@ body {
     align-items: center;
     justify-content: center;
     background-color: #333;
-    color: white;
+    color: #ffffff;
     border: none;
     cursor: pointer;
     transition: all 0.3s;
@@ -850,7 +850,7 @@ body {
 }
 
 .play-button:hover {
-    background-color: white;
+    background-color: #ffffff;
     transform: translate(-50%, -50%) scale(1.08);
 }
 
@@ -914,7 +914,7 @@ body {
 
 .fact-content {
     background-color: rgba(0, 0, 0, 0.5);
-    color: white;
+    color: #ffffff;
     padding: 40px;
     max-width: 700px;
     text-align: center;
@@ -924,8 +924,8 @@ body {
 .fact-number {
     display: inline-block;
     padding: 5px 15px;
-    background-color: white;
-    color: black;
+    background-color: #ffffff;
+    color: #000000;
     font-weight: bold;
     border-radius: 20px;
     margin-bottom: 15px;
@@ -966,7 +966,7 @@ body {
 }
 
 .facts-prev:hover, .facts-next:hover {
-    background-color: white;
+    background-color: #ffffff;
 }
 
 .facts-dots {
@@ -989,7 +989,7 @@ body {
 }
 
 .fact-dot.active {
-    background-color: white;
+    background-color: #ffffff;
 }
 
 /* Ways to Influence Section */
@@ -1025,7 +1025,7 @@ body {
     flex: 1;
     min-width: 300px;
     max-width: 500px;
-    background-color: white;
+    background-color: #ffffff;
     padding: 30px;
     border-radius: 8px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
@@ -1079,7 +1079,7 @@ body {
 /* Footer Styles */
 .site-footer {
     background-color: #702323;
-    color: white;
+    color: #ffffff;
     padding-top: 50px;
 }
 
@@ -1117,7 +1117,7 @@ body {
 }
 
 .footer-section ul li a {
-    color: white;
+    color: #ffffff;
     text-decoration: none;
     font-size: 14px;
     transition: opacity 0.3s;
@@ -1139,7 +1139,7 @@ body {
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    background-color: white;
+    background-color: #ffffff;
     color: #702323;
     transition: all 0.3s;
     text-decoration: none;
@@ -1349,7 +1349,7 @@ body {
         left: -100%;
         width: 85%;
         height: 100vh;
-        background-color: white;
+        background-color: #ffffff;
         flex-direction: column;
         padding: 80px 20px 20px;
         transition: left 0.3s ease;
