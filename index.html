@@ -102,13 +102,13 @@
                 <div class="collection-card">
                     <div class="collection-image summer-image">
                         <div class="collection-content">
-                            <h3>Summer Collections</h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras tincidunt augue eget</p>
+                            <h3 class="collection-head">Summer Collections</h3>
+                            <p class="collection-para">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras tincidunt augue eget</p>
                             <a href="#" class="view-all-btn">View All</a>
                         </div>
                     </div>
                 </div>
-                <div class="collection-card">
+                <div class="collection-card  right-card">
                     <div class="collection-image winter-image">
                         <div class="collection-content">
                             <h3>Winter Collections</h3>
@@ -245,14 +245,14 @@
             <!-- Casual Section -->
             <section class="category-section casual-section">
                 <div class="category-container">
-                    <div class="category-text">
+                    <div class="category-text casual-img">
                         <h2>Casual</h2>
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In sed fermentum massa. In velit sem, finibus a feugiat eget, finibus id dui. Nam id lorem vulputate, tempus felis at, luctus dui. Morbi convallis finibus commodo. Vestibulum rhoncus.</p>
                         <a href="#" class="view-all-btn">View All</a>
                     </div>
                     <div class="category-products">
                         <button class="slider-arrow casual-prev">
-                            <i class="bi bi-chevron-left"></i>
+                            <img src="https://res.cloudinary.com/disrohkeg/image/upload/v1747286602/MaterialIcon_q2kk8l.svg" alt="left arrow">
                         </button>
                         
                         <div class="product-slider casual-slider">
@@ -342,8 +342,8 @@
                             </div>
                         </div>
                         
-                        <button class="slider-arrow casual-next">
-                            <i class="bi bi-chevron-right"></i>
+                        <button class="slider-arrow casual-next right-arr">
+                            <img class="right-arrow" src="https://res.cloudinary.com/disrohkeg/image/upload/v1747286602/MaterialIcon_q2kk8l.svg" alt="right arrow">
                         </button>
                         
                         <div class="slider-dots casual-dots">
@@ -357,12 +357,15 @@
             <!-- Jump Suit Section -->
             <section class="category-section ethnic-section">
                 <div class="category-container">
-                    <div class="category-text">
+                    <div class="category-text jump-suit">
                         <h2>Jump Suit</h2>
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In sed fermentum massa. In velit sem, finibus a feugiat eget, finibus id dui. Nam id lorem vulputate, tempus felis at, luctus dui. Morbi convallis finibus commodo. Vestibulum rhoncus.</p>
                         <a href="#" class="view-all-btn">View All</a>
                     </div>
                     <div class="category-products">
+                        <button class="slider-arrow ethnic-prev">
+                            <img src="https://res.cloudinary.com/disrohkeg/image/upload/v1747286602/MaterialIcon_q2kk8l.svg" alt="left arrow">
+                        </button>
                         
                         <div class="product-slider ethnic-slider">
                             <div class="product-card">
@@ -406,11 +409,59 @@
                                     <p class="price">₹7000</p>
                                 </div>
                             </div>
+
+                            <!-- Duplicate cards for carousel -->
+                            <div class="product-card">
+                                <div class="product-image">
+                                    <img src="https://res.cloudinary.com/disrohkeg/image/upload/v1745393830/Jump_2-e63e6819b41e685d0795ac2514384d2a.png_yamjfv.png" alt="Jump Suit Style 2">
+                                    <div class="product-icons">
+                                        <button class="icon-btn cart-btn">
+                                            <i class="bi bi-cart-fill"></i>
+                                        </button>
+                                        <button class="icon-btn view-btn">
+                                            <i class="bi bi-eye-fill"></i>
+                                        </button>
+                                        <button class="icon-btn wishlist-btn">
+                                            <i class="bi bi-heart-fill"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="product-details">
+                                    <h3>Lorem Ipsum</h3>
+                                    <p class="price">₹7000</p>
+                                </div>
+                            </div>
+
+                            <div class="product-card">
+                                <div class="product-image">
+                                    <img src="https://res.cloudinary.com/disrohkeg/image/upload/v1745393831/jump_1-ae2424afb674ae8630b4bd2eb5203782.png_fz82lk.png" alt="Jump Suit Style 1">
+                                    <div class="product-icons">
+                                        <button class="icon-btn cart-btn">
+                                            <i class="bi bi-cart-fill"></i>
+                                        </button>
+                                        <button class="icon-btn view-btn">
+                                            <i class="bi bi-eye-fill"></i>
+                                        </button>
+                                        <button class="icon-btn wishlist-btn">
+                                            <i class="bi bi-heart-fill"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="product-details">
+                                    <h3>Lorem Ipsum</h3>
+                                    <p class="price">₹7000</p>
+                                </div>
+                            </div>
                         </div>
                         
-                    
+                        <button class="slider-arrow ethnic-next right-arr">
+                            <img class="right-arrow" src="https://res.cloudinary.com/disrohkeg/image/upload/v1747286602/MaterialIcon_q2kk8l.svg" alt="right arrow">
+                        </button>
                         
-                        
+                        <div class="slider-dots ethnic-dots">
+                            <span class="dot active"></span>
+                            <span class="dot"></span>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -418,14 +469,12 @@
             <!-- Anarkalis Section -->
             <section class="category-section accessories-section">
                 <div class="category-container">
-                    <div class="category-text">
+                    <div class="category-text Anarkali">
                         <h2>Anarkalis</h2>
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In sed fermentum massa. In velit sem, finibus a feugiat eget, finibus id dui. Nam id lorem vulputate, tempus felis at, luctus dui. Morbi convallis finibus commodo. Vestibulum rhoncus.</p>
                         <a href="#" class="view-all-btn">View All</a>
                     </div>
                     <div class="category-products">
-                    
-                        
                         <div class="product-slider accessories-slider">
                             <div class="product-card">
                                 <div class="product-image">
@@ -448,10 +497,7 @@
                                 </div>
                             </div>
                         </div>
-                        
-                        
-                        
-                        
+                        </div>
                     </div>
                 </div>
             </section>
@@ -475,7 +521,7 @@
         <section class="sustainability-facts">
             <div class="facts-slider">
                 <button class="slider-arrow facts-prev">
-                    <i class="bi bi-chevron-left"></i>
+                    <img src="https://res.cloudinary.com/disrohkeg/image/upload/v1747286602/MaterialIcon_q2kk8l.svg" alt="left arrow">
                 </button>
     
                 <div class="facts-slides">
@@ -509,8 +555,8 @@
                     </div>
                 </div>
     
-                <button class="slider-arrow facts-next">
-                    <i class="bi bi-chevron-right"></i>
+                <button class="slider-arrow facts-next right-arr">
+                    <img class="right-arrow" src="https://res.cloudinary.com/disrohkeg/image/upload/v1747286602/MaterialIcon_q2kk8l.svg" alt="right arrow">
                 </button>
             </div>
             

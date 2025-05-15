@@ -13,7 +13,12 @@ body {
     margin: 0 auto;
     box-shadow: 0 2px 10px rgba(0,0,0,0.05);
 }
-
+.category-text.jump-suit {
+    background-image: url("https://res.cloudinary.com/disrohkeg/image/upload/v1745393831/sharming_elegant_young_african_american_woman_with_long_curly_hair_wearing_jumpsuit_posing_cafe_indoor-8a39fdb631a38304ec320b4826937916-b72eb9.jpg_xe0mxp.jpg");
+}
+.category-text.Anarkali {
+    background-image: url("https://res.cloudinary.com/disrohkeg/image/upload/v1745393830/pexels_rezoana_amin_rayna_7406375-8e02f4d25ecd69249e44d51a07d21c3f-bd2266.jpg_ex0fgn.jpg");
+}
 .top-nav {
     display: flex;
     justify-content: flex-end;
@@ -522,12 +527,20 @@ body {
 
 .collection-card {
     flex: 1;
-    max-width: 570px;
+    width: 590px;
+    height: 270px;
     border-radius: 10px;
     overflow: hidden;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
-
+.collection-head {
+    width: 276px;
+    height: 40px;
+    font-family: Playfair Display;
+    font-size: 30px;
+    color: #ffffff;
+    text-decoration: none solid rgb(255, 255, 255);
+}
 .collection-image {
     background-size: cover;
     background-position: center;
@@ -554,19 +567,28 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(to right, rgba(0,0,0,0.1), rgba(0,0,0,0.6));
+    background: linear-gradient(-90deg, #0b244d 0%, rgba(0, 0, 0, 0) 135% );
     z-index: 1;
 }
 
 .collection-content {
     color: #ffffff;
     padding: 40px;
-    width: 55%;
+    width: 65%;
     text-align: left;
     position: relative;
     z-index: 2;
+    padding-bottom: 110px;
 }
-
+.collection-para {
+    width: 300px;
+    height: 48px;
+    font-family: Roboto;
+    font-size: 16px;
+    color: #ffffff;
+    text-decoration: none solid rgb(255, 255, 255);
+    line-height: 24px;
+}
 .collection-content h3 {
     font-size: 28px;
     margin-bottom: 15px;
@@ -612,7 +634,8 @@ body {
 }
 
 .category-text {
-    width: 30%;
+    width: 500px;
+    height: 500px;
     padding: 40px 30px;
     color: #ffffff;
     display: flex;
@@ -632,7 +655,7 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(112, 35, 35, 0.85);
+    background-color: rgba(112, 35, 35, 0.55);
     z-index: 0;
 }
 
@@ -642,7 +665,9 @@ body {
     position: relative;
     z-index: 1;
 }
-
+.category-text.casual-img {
+    background-image: url("https://res.cloudinary.com/disrohkeg/image/upload/v1745393834/fernando_lavin_fi5YSQfxbVk_unsplash-9d593f6a2d15520be6fcea5c70ff7445-5acaae.jpg_yg3s0y.jpg");
+}
 .category-text h2 {
     font-size: 36px;
     margin-bottom: 20px;
@@ -681,12 +706,15 @@ body {
 }
 
 .semiformal-prev, .casual-prev, .ethnic-prev, .accessories-prev {
-    padding-bottom: 40px;
     left: 10px;
+    top: 230px;
+    position: absolute;
 }
 
 .semiformal-next, .casual-next, .ethnic-next, .accessories-next {
-    right: -20px;
+    right: 10px;
+    top: 230px;
+    position: absolute;
 }
 
 .slider-arrow {
@@ -694,8 +722,8 @@ body {
     top: 50%;
     transform: translateY(-50%);
     width: 32px;
-height: 32px;
-fill: #632626;
+    height: 32px;
+    fill: #632626;
     width: 40px;
     background-color: transparent;
     border: none;
@@ -703,19 +731,20 @@ fill: #632626;
     display: flex;
     align-items: center;
     justify-content: center;
-    cursor: pointer;;
+    cursor: pointer;
     z-index: 10;
 }
 
-.right-arr{
+.right-arr {
     right: 50px;
     top: 230px;
 }
-.right-arrow{
+
+.right-arrow {
     width: 32px;
-height: 32px;
-fill: #632626;
-transform: rotate(180deg);
+    height: 32px;
+    fill: #632626;
+    transform: rotate(180deg);
 }
 
 .slider-arrow:hover {
@@ -1029,6 +1058,7 @@ transform: rotate(180deg);
     gap: 10px;
     z-index: 3;
 }
+
 .fact-dot {
     width: 12px;
     height: 12px;
@@ -1443,3 +1473,28 @@ transform: rotate(180deg);
     }
 }
 
+/* Sustainability facts slider arrows */
+.facts-prev {
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    position: absolute;
+}
+
+.facts-next {
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    position: absolute;
+}
+
+.facts-next .right-arrow,
+.casual-next .right-arrow,
+.ethnic-next .right-arrow,
+.accessories-next .right-arrow {
+    transform: rotate(180deg);
+}
+
+.collection-card.right-card .collection-image::before{
+    background : linear-gradient(-90deg, #180a04 0%, rgba(24, 10, 4, 0) 135% );
+}
