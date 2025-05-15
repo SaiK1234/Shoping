@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 dropdownToggle.setAttribute('aria-haspopup', 'true');
                 
                 dropdownToggle.addEventListener('click', function(e) {
-                    // Only for mobile and tablet
+                    // Only for mobile
                     if (window.innerWidth <= 768) {
                         e.preventDefault();
                         e.stopPropagation(); // Stop event bubbling
