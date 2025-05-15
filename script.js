@@ -575,63 +575,114 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 7000);
     }
 
-    // Ways to Influence Slider
-    const influenceSlides = document.querySelectorAll('.influence-slide');
-    const influenceDots = document.querySelectorAll('.influence-dot');
-    const influencePrevBtn = document.querySelector('.influence-prev');
-    const influenceNextBtn = document.querySelector('.influence-next');
-    
-    // Create more slides for demonstration if needed
-    const influenceSlidesContainer = document.querySelector('.influence-slides');
-    
-    // Make sure we have at least 3 slides to match the dots
-    if (influenceSlides.length < 3 && influenceSlidesContainer) {
-        // Clone the first slide to create a third slide
-        const thirdSlide = influenceSlides[0].cloneNode(true);
-        influenceSlidesContainer.appendChild(thirdSlide);
-    }
-    
-    let currentInfluenceIndex = 0;
-    const totalInfluenceSlides = Math.ceil((influenceSlides.length || 0) / 2); // Show 2 slides per view on desktop
-    
-    // Function to update the influence slider
-    function updateInfluenceSlider(index) {
-        // Update active dot
-        influenceDots.forEach((dot, i) => {
-            if (i === index) {
-                dot.classList.add('active');
-            } else {
-                dot.classList.remove('active');
+    // Function to initialize the influence slider - UPDATED FOR MOBILE
+    function initializeInfluenceSlider() {
+        const influenceSlides = document.querySelectorAll('.influence-slide');
+        const influencePrev = document.querySelector('.influence-prev');
+        const influenceNext = document.querySelector('.influence-next');
+        const influenceDots = document.querySelectorAll('.influence-dots .influence-dot');
+        const influenceSlidesContainer = document.querySelector('.influence-slides');
+        const influenceDividers = document.querySelectorAll('.influence-divider');
+        
+        if (!influenceSlides.length || !influencePrev || !influenceNext || !influenceDots.length || !influenceSlidesContainer) return;
+        
+        // We have 3 pairs of slides (6 cards total)
+        let currentIndex = 0;
+        const totalPairs = 3;
+        
+        function updateSlider() {
+            // Hide all slides first
+            influenceSlides.forEach(slide => {
+                slide.style.display = 'none';
+            });
+            
+            // Hide all dividers
+            influenceDividers.forEach(divider => {
+                divider.style.display = 'none';
+            });
+            
+            // Show current pair of slides
+            const startIndex = currentIndex * 2;
+            if (influenceSlides[startIndex]) {
+                influenceSlides[startIndex].style.display = 'block';
+            }
+            
+            if (influenceSlides[startIndex + 1]) {
+                influenceSlides[startIndex + 1].style.display = 'block';
+            }
+            
+            // Show divider between current pair
+            if (influenceDividers[currentIndex]) {
+                influenceDividers[currentIndex].style.display = 'block';
+            }
+            
+            // Update dots
+            influenceDots.forEach((dot, i) => {
+                dot.classList.toggle('active', i === currentIndex);
+            });
+            
+            // Update arrow states
+            influencePrev.style.opacity = currentIndex === 0 ? '0.5' : '1';
+            influencePrev.disabled = currentIndex === 0;
+            
+            influenceNext.style.opacity = currentIndex >= totalPairs - 1 ? '0.5' : '1';
+            influenceNext.disabled = currentIndex >= totalPairs - 1;
+        }
+        
+        // Initial setup
+        updateSlider();
+        
+        // Previous button click
+        influencePrev.addEventListener('click', () => {
+            if (currentIndex > 0) {
+                currentIndex--;
+                updateSlider();
             }
         });
         
-        // For a more complex slider with actual slide animations,
-        // you would add transformation logic here
-        currentInfluenceIndex = index;
-    }
-    
-    // Previous button click
-    if (influencePrevBtn) {
-        influencePrevBtn.addEventListener('click', function() {
-            const newIndex = (currentInfluenceIndex - 1 + totalInfluenceSlides) % totalInfluenceSlides;
-            updateInfluenceSlider(newIndex);
+        // Next button click
+        influenceNext.addEventListener('click', () => {
+            if (currentIndex < totalPairs - 1) {
+                currentIndex++;
+                updateSlider();
+            }
         });
-    }
-    
-    // Next button click
-    if (influenceNextBtn) {
-        influenceNextBtn.addEventListener('click', function() {
-            const newIndex = (currentInfluenceIndex + 1) % totalInfluenceSlides;
-            updateInfluenceSlider(newIndex);
+        
+        // Dot navigation
+        influenceDots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                currentIndex = index;
+                updateSlider();
+            });
         });
-    }
-    
-    // Dot navigation
-    influenceDots.forEach((dot, index) => {
-        dot.addEventListener('click', function() {
-            updateInfluenceSlider(index);
+        
+        // Handle responsive behavior
+        window.addEventListener('resize', () => {
+            updateSlider();
         });
-    });
+        
+        // Add touch swipe support
+        let touchStartX = 0;
+        let touchEndX = 0;
+        
+        influenceSlidesContainer.addEventListener('touchstart', e => {
+            touchStartX = e.changedTouches[0].screenX;
+        }, false);
+        
+        influenceSlidesContainer.addEventListener('touchend', e => {
+            touchEndX = e.changedTouches[0].screenX;
+            
+            if (touchEndX < touchStartX - 50 && currentIndex < totalPairs - 1) {
+                // Swipe left, go to next slide
+                currentIndex++;
+                updateSlider();
+            } else if (touchEndX > touchStartX + 50 && currentIndex > 0) {
+                // Swipe right, go to previous slide
+                currentIndex--;
+                updateSlider();
+            }
+        }, false);
+    }
 
     // Initialize all category carousels
     const carouselSections = [
@@ -985,95 +1036,6 @@ document.addEventListener('DOMContentLoaded', function() {
             }, false);
             
             factsSlider.addEventListener('touchend', e => {
-                touchEndX = e.changedTouches[0].screenX;
-                handleSwipe();
-            }, false);
-        }
-    }
-    
-    // Function to initialize the influence slider - UPDATED FOR MOBILE
-    function initializeInfluenceSlider() {
-        const influenceSlides = document.querySelectorAll('.influence-slide');
-        const influencePrev = document.querySelector('.influence-prev');
-        const influenceNext = document.querySelector('.influence-next');
-        const influenceDots = document.querySelectorAll('.influence-dots .influence-dot');
-        
-        if (!influenceSlides.length || !influencePrev || !influenceNext || !influenceDots.length) return;
-        
-        let currentIndex = 0;
-        
-        function updateSlider() {
-            // Hide all slides
-            influenceSlides.forEach(slide => {
-                slide.style.display = 'none';
-            });
-            
-            // Show current slide and next slide (on larger screens)
-            influenceSlides[currentIndex].style.display = 'block';
-            if (window.innerWidth > 768 && currentIndex + 1 < influenceSlides.length) {
-                influenceSlides[currentIndex + 1].style.display = 'block';
-            }
-            
-            // Update dots
-            influenceDots.forEach((dot, i) => {
-                dot.classList.toggle('active', i === currentIndex);
-            });
-        }
-        
-        // Initialize slider
-        updateSlider();
-        
-        // Previous button
-        influencePrev.addEventListener('click', () => {
-            if (currentIndex > 0) {
-                currentIndex--;
-                updateSlider();
-            }
-        });
-        
-        // Next button
-        influenceNext.addEventListener('click', () => {
-            if (currentIndex < influenceSlides.length - 1) {
-                currentIndex++;
-                updateSlider();
-            }
-        });
-        
-        // Dot navigation
-        influenceDots.forEach((dot, index) => {
-            dot.addEventListener('click', () => {
-                currentIndex = index;
-                updateSlider();
-            });
-        });
-
-        // Add touch swipe support for influence slider
-        const influenceSliderContainer = document.querySelector('.influence-slides-container');
-        if (influenceSliderContainer) {
-            let touchStartX = 0;
-            let touchEndX = 0;
-            
-            function handleSwipe() {
-                if (touchEndX < touchStartX - 50) {
-                    // Swipe left, go to next slide
-                    if (currentIndex < influenceSlides.length - 1) {
-                        currentIndex++;
-                        updateSlider();
-                    }
-                } else if (touchEndX > touchStartX + 50) {
-                    // Swipe right, go to previous slide
-                    if (currentIndex > 0) {
-                        currentIndex--;
-                        updateSlider();
-                    }
-                }
-            }
-            
-            influenceSliderContainer.addEventListener('touchstart', e => {
-                touchStartX = e.changedTouches[0].screenX;
-            }, false);
-            
-            influenceSliderContainer.addEventListener('touchend', e => {
                 touchEndX = e.changedTouches[0].screenX;
                 handleSwipe();
             }, false);
