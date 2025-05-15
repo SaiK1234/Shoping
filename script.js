@@ -737,8 +737,10 @@ document.addEventListener('DOMContentLoaded', function() {
         // Variables for slider state
         let currentSlideIndex = 0;
         const totalSlides = section.productCards.length;
-        const visibleSlides = window.innerWidth > 768 ? 2 : 1; // Show 2 on desktop, 1 on mobile
-        const maxSlideIndex = Math.max(0, totalSlides - visibleSlides);
+        // Responsive: Show 1 on mobile, 2 on larger screens
+        const getVisibleSlides = () => window.innerWidth <= 767 ? 1 : 2;
+        let visibleSlides = getVisibleSlides();
+        let maxSlideIndex = Math.max(0, totalSlides - visibleSlides);
         
         // Initialize slider position
         updateSliderPosition();
@@ -772,10 +774,14 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Event listener for window resize
         window.addEventListener('resize', () => {
-            const newVisibleSlides = window.innerWidth > 768 ? 2 : 1;
-            const newMaxSlideIndex = Math.max(0, totalSlides - newVisibleSlides);
-            currentSlideIndex = Math.min(currentSlideIndex, newMaxSlideIndex);
-            updateSliderPosition();
+            const newVisibleSlides = getVisibleSlides();
+            if (newVisibleSlides !== visibleSlides) {
+                visibleSlides = newVisibleSlides;
+                maxSlideIndex = Math.max(0, totalSlides - visibleSlides);
+                // Ensure current index is valid after resize
+                currentSlideIndex = Math.min(currentSlideIndex, maxSlideIndex);
+                updateSliderPosition();
+            }
         });
         
         // Click event for previous arrow
@@ -900,8 +906,14 @@ document.addEventListener('DOMContentLoaded', function() {
         
         let currentIndex = 0;
         const totalSlides = slides.length;
-        const cardsPerSlide = 2; // Always show 2 cards per slide
-        const maxIndex = Math.max(0, Math.ceil(totalSlides / cardsPerSlide) - 1);
+        // Responsive: 1 card on mobile, 2 on tablet/desktop
+        let cardsPerSlide = getCardsPerSlide();
+        let maxIndex = Math.max(0, Math.ceil(totalSlides / cardsPerSlide) - 1);
+        
+        // Helper function to determine cards per slide based on screen size
+        function getCardsPerSlide() {
+            return window.innerWidth <= 767 ? 1 : 2;
+        }
         
         function updateSliderPosition() {
             // Update active dot
@@ -914,7 +926,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 slide.style.display = 'none';
             });
             
-            // Show only the current slide's cards (2 cards per slide)
+            // Show only the current slide's cards (responsive number of cards per slide)
             const startCardIndex = currentIndex * cardsPerSlide;
             for (let i = 0; i < cardsPerSlide; i++) {
                 const cardIndex = startCardIndex + i;
@@ -960,9 +972,17 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Handle window resize
         window.addEventListener('resize', () => {
-            // Reset position
-            currentIndex = 0;
-            updateSliderPosition();
+            // Update cards per slide based on screen size
+            const newCardsPerSlide = getCardsPerSlide();
+            
+            if (newCardsPerSlide !== cardsPerSlide) {
+                cardsPerSlide = newCardsPerSlide;
+                maxIndex = Math.max(0, Math.ceil(totalSlides / cardsPerSlide) - 1);
+                
+                // Ensure current index is valid after resize
+                currentIndex = Math.min(currentIndex, maxIndex);
+                updateSliderPosition();
+            }
         });
     }
     
