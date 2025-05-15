@@ -989,7 +989,7 @@ body {
 }
 
 .fact-content {
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: transparent````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````;
     color: #ffffff;
     padding: 40px;
     max-width: 700px;
@@ -1157,10 +1157,9 @@ body {
 
 .influence-slide {
     flex: 1;
-    background-color: #ffffff;
+    background-color: transparent;
     padding: 30px;
     border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     text-align: left;
     margin: 0 30px;
 }
